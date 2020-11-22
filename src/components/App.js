@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { addRecipe, removeFromCalendar } from '../actions'
 
 class App extends Component {
   render () {
@@ -33,4 +34,12 @@ function mapStateToProps (calendar) {
   }
 }
 
-export default connect(mapStateToProps)(App)
+// Maps dispatch to component props to clean up component
+function mapDispatchToProps (dispatch) {
+  return {
+    selectRecipe: (data) => dispatch(addRecipe(data)),
+    remove: (data) => dispatch(removeFromCalendar(data))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
